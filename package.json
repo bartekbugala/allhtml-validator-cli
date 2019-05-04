@@ -1,5 +1,5 @@
 {
-  "name": "html-validator-cli",
+  "name": "html-validator-allfiles-cli",
   "version": "5.0.0",
   "description": "CLI for validating html using validator.w3.org/nu",
   "license": "MIT",
@@ -42,7 +42,7 @@
   "devDependencies": {
     "coveralls": "3.0.2",
     "standard": "12.0.1",
-    "tap": "12.5.3"
+    "tap": "^13.1.2"
   },
   "files": [
     "lib/*.{js,json}",

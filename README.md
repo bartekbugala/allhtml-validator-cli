@@ -2,7 +2,17 @@
 [![Coverage Status](https://coveralls.io/repos/zrrrzzt/html-validator-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/zrrrzzt/html-validator-cli?branch=master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-# html-validator-cli
+# html-validator-all-cli
+(MODIFICATION OF THE ORIGINAL html-validator-all-cli)
+
+## ADDED - All files
+
+Checks all html files in all subfolders except node_modules folder
+
+```
+--allfiles (works with --verbose)
+```
+
 
 CLI for validating html using [validator.w3.org/nu](http://validator.w3.org/nu/)
 
