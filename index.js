@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 'use strict'
 
+// ADDED PATH + CHANGED const to let
 const path = require('path')
+
 const fs = require('fs')
 const validator = require('html-validator')
 const getHelpText = require('./lib/getHelpText')
@@ -54,6 +56,7 @@ if (argv.data) {
   options.data = argv.data
 }
 
+// MODIFIED BELOW THIS LINE
 if (argv.allfiles) {
   function findAllFilesByExtension(directoryPath, extension, files, result) {
 
