@@ -1,13 +1,10 @@
 {
-  "name": "html-validator-allfiles-cli",
-  "version": "5.0.0",
-  "description": "CLI for validating html using validator.w3.org/nu",
+  "name": "@kodilla/allhtml-validator-cli",
+  "version": "1.0.0",
+  "description": "CLI for validating all html files in project folder using validator.w3.org/nu",
   "license": "MIT",
-  "author": {
-    "name": "Geir Gåsodden",
-    "email": "geir.gasodden@pythonia.no",
-    "url": "https://github.com/zrrrzzt"
-  },
+  "author": "Bartek Bugała <bartek.bugala@gmail.com> (https://github.com/bartekbugala)",
+  "private": true,
   "main": "index.js",
   "bin": {
     "html-validator": "index.js"
@@ -24,17 +21,18 @@
   },
   "keywords": [
     "html-validator",
+    "allhtml-validator",
     "validation",
     "cli"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zrrrzzt/html-validator-cli.git"
+    "url": "git+https://github.com/bartekbugala/allhtml-validator-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/zrrrzzt/html-validator-cli/issues"
+    "url": "https://github.com/bartekbugala/allhtml-validator-cli/issues"
   },
-  "homepage": "https://github.com/zrrrzzt/html-validator-cli#readme",
+  "homepage": "https://github.com/bartekbugala/allhtml-validator-cli#readme",
   "dependencies": {
     "html-validator": "3.1.3",
     "minimist": "1.2.0"
@@ -47,5 +45,9 @@
   "files": [
     "lib/*.{js,json}",
     "index.js"
-  ]
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }

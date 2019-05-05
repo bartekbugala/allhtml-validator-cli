@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 'use strict'
 
-// ADDED PATH + CHANGED const to let
-const path = require('path')
+const path = require('path');
 
-const fs = require('fs')
-const validator = require('html-validator')
-const getHelpText = require('./lib/getHelpText')
-const pkg = require('./package.json')
-let query = process.argv[2]
-let argv = require('minimist')((process.argv.slice(2)))
-let options = {
+const fs = require('fs');
+const validator = require('html-validator');
+const getHelpText = require('./lib/getHelpText');
+const pkg = require('./package.json');
+let query = process.argv[2];
+let argv = require('minimist')((process.argv.slice(2)));
+const options = {
   format: 'text',
   ignore: argv.ignore
 }
@@ -56,7 +55,7 @@ if (argv.data) {
   options.data = argv.data
 }
 
-// MODIFIED BELOW THIS LINE
+// MODIFICATIONS by Bartek Bugała
 if (argv.allfiles) {
   function findAllFilesByExtension(directoryPath, extension, files, result) {
 
@@ -68,7 +67,7 @@ if (argv.allfiles) {
         let pathToFile = path.join(directoryPath, file)
         if (fs.statSync(pathToFile).isDirectory() && !pathToFile.includes('node_modules')) {
           result = findAllFilesByExtension(pathToFile, extension, fs.readdirSync(pathToFile), result);
-          
+
         }
         else {
           if (file.substr(-1 * (extension.length + 1)) == '.' + extension) {
@@ -76,7 +75,7 @@ if (argv.allfiles) {
             let pathSlash = pathBackslash.replace(/\\/g, "/");
             options.data = fs.readFileSync(pathSlash);
             runValidator(pathSlash);
-            
+
 
           }
         }
@@ -92,8 +91,76 @@ if (!argv.allfiles) {
   runValidator(options);
 }
 
+function colorNodeLog(msg, color = 'white', bgColor) {
+
+  switch (color) {
+    case 'black':
+    color = '\x1b[30m';
+      break;
+    case 'red':
+    color = '\x1b[31m';
+      break;
+    case 'green':
+    color = '\x1b[32m';
+      break;
+    case 'yellow':
+    color = '\x1b[33m';
+      break;
+    case 'blue':
+    color = '\x1b[34m';
+      break;
+    case 'magenta':
+    color = '\x1b[35m';
+      break;
+    case 'cyan':
+    color = '\x1b[36m';
+      break;
+    case 'white':
+    color = '\x1b[37m';
+      break;
+    default:
+    color = '\x1b[37m';
+      break;
+  }
+  let colorCodes = color;
+  if (typeof bgColor !== 'undefined') {
+    switch (bgColor) {
+      case 'black':
+        bgColor = '\x1b[40m';
+        break;
+      case 'red':
+        bgColor = '\x1b[41m';
+        break;
+      case 'green':
+        bgColor = '\x1b[42m';
+        break;
+      case 'yellow':
+        bgColor = '\x1b[43m';
+        break;
+      case 'blue':
+        bgColor = '\x1b[44m';
+        break;
+      case 'magenta':
+        bgColor = '\x1b[45m';
+        break;
+      case 'cyan':
+        bgColor = '\x1b[46m';
+        break;
+      case 'white':
+        bgColor = '\x1b[47m';
+        break;
+      default:
+        bgColor = '\x1b[40m';
+        break;
+    }
+    colorCodes = color + '%s' + bgColor;
+  }
+
+  console.log(colorCodes, msg);
+}
+
 function runValidator(CurrentFilePath) {
-  
+
   validator(options, (error, data) => {
     if (error) {
       console.error(error)
@@ -131,22 +198,23 @@ function runValidator(CurrentFilePath) {
       }
       if (validationFailed) {
         if (!argv.verbose && !argv.quiet) {
-          console.log ('Validated file: '+CurrentFilePath);
-          console.log(documentNotFound ? 'Page not found' : 'Page is not valid')
+          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog(documentNotFound ? 'Page not found' : 'Page is not valid', 'red');
         }
         if (argv.verbose || argv.quiet) {
-          console.log ('Validated file: '+CurrentFilePath);
-          console.log(msg)
+          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog(documentNotFound ? 'Page not found' : 'Page is not valid', 'red');
+          colorNodeLog(msg, 'magenta');
         }
         process.exitCode = 1
       } else {
         if (!argv.verbose && !argv.quiet) {
-          console.log ('Validated file: '+CurrentFilePath);
-          console.log('Page is valid')
+          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog('Page is valid','green');
         }
         if (argv.verbose) {
-          console.log ('Validated file: '+CurrentFilePath);
-          console.log(msg)
+          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog(msg, 'green');
         }
       }
     }

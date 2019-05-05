@@ -1,13 +1,10 @@
-[![Build Status](https://travis-ci.org/zrrrzzt/html-validator-cli.svg?branch=master)](https://travis-ci.org/zrrrzzt/html-validator-cli)
-[![Coverage Status](https://coveralls.io/repos/zrrrzzt/html-validator-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/zrrrzzt/html-validator-cli?branch=master)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+allhtml-validator-cli?branch=master)
 
-# html-validator-all-cli
-(MODIFICATION OF THE ORIGINAL html-validator-all-cli)
+# allhtml-validator-cli
+(MODIFICATION OF THE ORIGINAL html-validator-cli from Geir Gåsodden)
 
-## ADDED - All files
-
-Checks all html files in all subfolders except node_modules folder
+## ADDED - allfiles option
+Checks all *.html files in all subfolders except node_modules folder
 
 ```
 --allfiles (works with --verbose)
@@ -25,7 +22,7 @@ Sends ```Page not found``` to ```STDOUT``` and exits with code 1 if page is not 
 ## Installation
 
 ```
-$ npm i html-validator-cli -g
+$ npm i allhtml-validator-cli -g
 ```
 
 ## Usage
@@ -105,6 +102,7 @@ returns array of error messages
 ## Related
 
 - [html-validator](https://github.com/zrrrzzt/html-validator) API for this module
+- [html-validator](https://github.com/zrrrzzt/html-validator-cli) Original CLI !
 
 ## License
 
