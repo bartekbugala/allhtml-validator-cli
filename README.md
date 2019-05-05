@@ -1,5 +1,3 @@
-allhtml-validator-cli?branch=master)
-
 # allhtml-validator-cli
 (MODIFICATION OF THE ORIGINAL html-validator-cli from Geir Gåsodden)
 
