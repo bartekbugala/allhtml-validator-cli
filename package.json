@@ -8,7 +8,6 @@
     "email": "bartek.bugala@gmail.com",
     "url": "https://github.com/bartekbugala"
   },
-  "private": true,
   "main": "index.js",
   "bin": {
     "html-validator": "index.js"

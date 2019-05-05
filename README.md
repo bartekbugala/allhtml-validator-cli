@@ -22,7 +22,14 @@ Sends ```Page not found``` to ```STDOUT``` and exits with code 1 if page is not 
 ## Installation
 
 ```
-$ npm i allhtml-validator-cli -g
+Add dependency to package.json
+
+ "devDependencies": {
+    "allhtml-validator-cli": "git+https://github.com/bartekbugala/allhtml-validator-cli"
+ }
+
+or place in node_modules directory
+
 ```
 
 ## Usage
@@ -36,6 +43,21 @@ With file
 ```
 $ html-validator --file=<path-to-file>
 ```
+
+With allfiles
+ (Validate all *.html files in parent directory and subdirectories except node_modules directory)
+
+```
+$ html-validator --allfiles
+````
+
+With noexiterr
+ (Disable exit error message for npm scripts)
+
+```
+$ html-validator --noexiterr
+```
+
 
 With data
 

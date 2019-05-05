@@ -2,6 +2,7 @@
 'use strict'
 
 const path = require('path');
+let noExitError;
 
 const fs = require('fs');
 const validator = require('html-validator');
@@ -53,6 +54,10 @@ if (argv.file) {
 
 if (argv.data) {
   options.data = argv.data
+}
+
+if (argv.noexiterr) {
+  noExitError = 0;
 }
 
 // MODIFICATIONS by Bartek Bugała
@@ -164,7 +169,7 @@ function runValidator(CurrentFilePath) {
   validator(options, (error, data) => {
     if (error) {
       console.error(error)
-      process.exitCode = 1
+      process.exitCode = noExitError && 0 // CHANGE
     } else {
       let msg
       let validationFailed = false
@@ -206,7 +211,7 @@ function runValidator(CurrentFilePath) {
           colorNodeLog(documentNotFound ? 'Page not found' : 'Page is not valid', 'red');
           colorNodeLog(msg, 'magenta');
         }
-        process.exitCode = 1
+        process.exitCode = noExitError && 1 // CHANGE
       } else {
         if (!argv.verbose && !argv.quiet) {
           colorNodeLog('File: ' + CurrentFilePath, 'yellow');
