@@ -220,6 +220,7 @@ function runValidator(CurrentFilePath) {
         if (argv.verbose) {
           colorNodeLog('File: ' + CurrentFilePath, 'yellow');
           colorNodeLog(msg, 'green');
+          colorNodeLog('====================================', 'white');
         }
       }
     }
