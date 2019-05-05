@@ -1,9 +1,13 @@
 {
-  "name": "@kodilla/allhtml-validator-cli",
+  "name": "allhtml-validator-cli",
   "version": "1.0.0",
   "description": "CLI for validating all html files in project folder using validator.w3.org/nu",
   "license": "MIT",
-  "author": "Bartek Bugała <bartek.bugala@gmail.com> (https://github.com/bartekbugala)",
+  "author": {
+    "name": "Bartek Bugała",
+    "email": "bartek.bugala@gmail.com",
+    "url": "https://github.com/bartekbugala"
+  },
   "private": true,
   "main": "index.js",
   "bin": {
@@ -45,9 +49,5 @@
   "files": [
     "lib/*.{js,json}",
     "index.js"
-  ],
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  }
+  ]
 }
