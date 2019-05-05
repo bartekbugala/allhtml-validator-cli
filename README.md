@@ -100,7 +100,7 @@ returns array of error messages
 ## Related
 
 - [html-validator](https://github.com/zrrrzzt/html-validator) API for this module
-- [html-validator](https://github.com/zrrrzzt/html-validator-cli) Original CLI !
+- [html-validator-cli](https://github.com/zrrrzzt/html-validator-cli) Original CLI !
 
 ## License
 
