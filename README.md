@@ -26,8 +26,6 @@ Add dependency to package.json
     "allhtml-validator-cli": "git+https://github.com/bartekbugala/allhtml-validator-cli"
  }
 
-or place in node_modules directory
-
 ```
 
 ## Usage
