@@ -62,7 +62,7 @@ if (argv.noexiterr) {
 
 // MODIFICATIONS by Bartek Bugała
 if (argv.allfiles) {
-  function findAllFilesByExtension(directoryPath, extension, files, result) {
+  function validateMarkupOfAllFilesByExtension(directoryPath, extension, files, result) {
 
     files = files || fs.readdirSync(directoryPath)
     result = result || []
