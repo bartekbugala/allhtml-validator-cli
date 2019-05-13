@@ -210,6 +210,7 @@ function runValidator(CurrentFilePath) {
           colorNodeLog('File: ' + CurrentFilePath, 'yellow');
           colorNodeLog(documentNotFound ? 'Page not found' : 'Page is not valid', 'red');
           colorNodeLog(msg, 'magenta');
+          colorNodeLog('====================================', 'white');
         }
         process.exitCode = noExitError && 1 // CHANGE
       } else {
