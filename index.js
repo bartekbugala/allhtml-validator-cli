@@ -89,7 +89,7 @@ if (argv.allfiles) {
     return;
   }
 
-  findAllFilesByExtension('./', 'html');
+  validateMarkupOfAllFilesByExtension('./', 'html');
 }
 
 if (!argv.allfiles) {
