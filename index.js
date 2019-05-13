@@ -71,7 +71,7 @@ if (argv.allfiles) {
       function (file) {
         let pathToFile = path.join(directoryPath, file)
         if (fs.statSync(pathToFile).isDirectory() && !pathToFile.includes('node_modules')) {
-          result = findAllFilesByExtension(pathToFile, extension, fs.readdirSync(pathToFile), result);
+          result = validateMarkupOfAllFilesByExtension(pathToFile, extension, fs.readdirSync(pathToFile), result);
 
         }
         else {
