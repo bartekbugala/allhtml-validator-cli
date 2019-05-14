@@ -30,6 +30,8 @@ Add dependency to package.json
 
 ## Usage
 
+# Quick Start: Just add ``` "test:all": "html-validator --allfiles --verbose", ``` To NPM
+
 ```
 $ html-validator <url>
 ```
