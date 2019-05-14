@@ -35,7 +35,11 @@ Add this to package.json:
 ```
 "test:all": "html-validator --allfiles --verbose"
 ```
-Or run:
+Then: for auto-task
+```
+"watch:validate": "onchange *.html -- npm run test:all"
+```
+Manual:
 ```
 html-validator --allfiles --verbose
 ```
