@@ -133,6 +133,14 @@ returns array of error messages
 ]
 ```
 
+## Removing
+
+To remove just delete the dependency input:
+```
+DELETE--> "allhtml-validator-cli": "git+https://github.com/bartekbugala/allhtml-validator-cli"
+```
+Run npm install, refresh node_modules folder if needed.
+
 ## Related
 
 - [html-validator](https://github.com/zrrrzzt/html-validator) API for this module
