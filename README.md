@@ -1,5 +1,6 @@
 # allhtml-validator-cli
 (MODIFICATION OF THE ORIGINAL html-validator-cli from Geir Gåsodden)
+Keeps the original functionality + adds new features
 
 ## ADDED - allfiles option
 Checks all *.html files in all subfolders except node_modules folder
@@ -7,15 +8,16 @@ Checks all *.html files in all subfolders except node_modules folder
 ```
 --allfiles (works with --verbose)
 ```
-
-
+## Descritpion
 CLI for validating html using [validator.w3.org/nu](http://validator.w3.org/nu/)
+With new local file validatrion features
 
 Sends ```Page is valid```to ```STDOUT``` and exits with code 0 if page is valid.
 
 Sends ```Page is not valid``` to ```STDOUT``` and exits with code 1 if page is not valid.
 
 Sends ```Page not found``` to ```STDOUT``` and exits with code 1 if page is not found.
+
 
 ## Installation
 
