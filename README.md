@@ -135,7 +135,7 @@ returns array of error messages
 
 ## Removing
 
-To remove just delete the dependency input:
+To remove just delete the dependency entry from package.json:
 ```
 DELETE--> "allhtml-validator-cli": "git+https://github.com/bartekbugala/allhtml-validator-cli"
 ```
