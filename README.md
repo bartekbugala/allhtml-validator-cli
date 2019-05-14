@@ -30,7 +30,7 @@ Add dependency to package.json
 
 ## Usage
 
-# Quick Start:
+### Quick Start:
 Add this to package.json:
 ```
 "test:all": "html-validator --allfiles --verbose"
@@ -39,7 +39,7 @@ Or run:
 ```
 html-validator --allfiles --verbose
 ```
-# More options:
+### More options:
 ```
 $ html-validator <url>
 ```
