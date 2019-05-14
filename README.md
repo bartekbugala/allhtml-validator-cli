@@ -43,7 +43,7 @@ Then: for auto-task - REQUIRES ONCHANGE [npm - onchange](https://www.npmjs.com/p
 ```
 Manual:
 ```
-html-validator --allfiles --verbose
+$ html-validator --allfiles --verbose
 ```
 ### More options:
 ```
@@ -139,7 +139,7 @@ To remove just delete the dependency input:
 ```
 DELETE--> "allhtml-validator-cli": "git+https://github.com/bartekbugala/allhtml-validator-cli"
 ```
-Run ```npm install ``` refresh node_modules folder if needed.
+Run ``` $ npm install ``` refresh node_modules folder if needed.
 
 ## Related
 
