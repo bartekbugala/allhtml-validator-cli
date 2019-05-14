@@ -78,9 +78,17 @@ if (argv.allfiles) {
           if (file.substr(-1 * (extension.length + 1)) == '.' + extension) {
             let pathBackslash = pathToFile;
             let pathSlash = pathBackslash.replace(/\\/g, "/");
+            if(fs.readFileSync(pathSlash) == ''){
+              colorNodeLog(' ', 'white');
+              colorNodeLog('====================================', 'white');
+              colorNodeLog('File: ' + pathSlash + ' is empty!', 'red');
+              colorNodeLog(' ', 'white');
+              colorNodeLog('====================================', 'white');
+              return;
+            }
+
             options.data = fs.readFileSync(pathSlash);
             runValidator(pathSlash);
-
 
           }
         }
