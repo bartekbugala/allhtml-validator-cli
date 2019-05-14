@@ -37,7 +37,7 @@ Add this to package.json:
 ```
 "test:all": "html-validator --allfiles --verbose"
 ```
-Then: for auto-task
+Then: for auto-task - REQUIRES ONCHANGE [npm - onchange](https://www.npmjs.com/package/onchange)
 ```
 "watch:validate": "onchange *.html -- npm run test:all"
 ```
