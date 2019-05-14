@@ -1,6 +1,6 @@
 {
   "name": "allhtml-validator-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI for validating all html files in project folder using validator.w3.org/nu",
   "license": "MIT",
   "author": {
