@@ -48,7 +48,7 @@ $ html-validator --allfiles
 ````
 
 With noexiterr
- (Disable exit error message for npm scripts)
+ (Disable some exit error message for npm scripts)
 
 ```
 $ html-validator --noexiterr
