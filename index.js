@@ -3,6 +3,7 @@
 
 const path = require('path');
 let noExitError;
+let fileOrUrl = 'file';
 
 const fs = require('fs');
 const validator = require('html-validator');
@@ -18,42 +19,70 @@ const options = {
 let isError = item => item.type === 'error'
 let pageNotFound = item => item.type === 'non-document-error'
 
+// Codes for console colors
+let colors = {
+  black: '\x1b[30m',
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+  white: '\x1b[37m'
+}
+// Codes for console background colors
+let bgColors = {
+  black: '\x1b[40m',
+  red: '\x1b[41m',
+  green: '\x1b[42m',
+  yellow: '\x1b[43m',
+  blue: '\x1b[44m',
+  magenta: '\x1b[45m',
+  cyan: '\x1b[46m',
+  white: '\x1b[47m'
+}
+
 if (!query || process.argv.indexOf('-h') !== -1 || process.argv.indexOf('--help') !== -1) {
-  console.log(getHelpText())
-  process.exit(0)
+  console.log(getHelpText());
+  process.exit(0);
 }
 
 if (process.argv.indexOf('-v') !== -1 || process.argv.indexOf('--version') !== -1) {
-  console.log(pkg.version)
-  process.exit(0)
+  console.log(pkg.version);
+  process.exit(0);
 }
 
 if (query.indexOf('http') !== -1) {
-  options.url = argv._[0]
+  options.url = argv._[0];
 }
 
 if (argv.format && !argv.ignore) {
-  options.format = argv.format
+  options.format = argv.format;
 }
 
 if (argv.url) {
-  options.url = argv.url
+  options.url = argv.url;
+  fileOrUrl = 'url';
 }
 
 if (argv.validator) {
-  options.validator = argv.validator
+  options.validator = argv.validator;
 }
 
 if (argv.headers) {
-  options.headers = JSON.parse(argv.headers)
+  options.headers = JSON.parse(argv.headers);
 }
 
 if (argv.file) {
-  options.data = fs.readFileSync(argv.file)
+  options.data = fs.readFileSync(argv.file);
+  if (isObjectEmpty(options.data)) {
+    showEmptyFileMessage(argv.file);
+    return;
+  }
 }
 
 if (argv.data) {
-  options.data = argv.data
+  options.data = argv.data;
 }
 
 if (argv.noexiterr) {
@@ -64,115 +93,67 @@ if (argv.noexiterr) {
 if (argv.allfiles) {
   function validateMarkupOfAllFilesByExtension(directoryPath, extension, files, result) {
 
-    files = files || fs.readdirSync(directoryPath)
-    result = result || []
+    files = files || fs.readdirSync(directoryPath);
+    result = result || [];
 
     files.forEach(
       function (file) {
-        let pathToFile = path.join(directoryPath, file)
+        let pathToFile = path.join(directoryPath, file);
         if (fs.statSync(pathToFile).isDirectory() && !pathToFile.includes('node_modules')) {
           result = validateMarkupOfAllFilesByExtension(pathToFile, extension, fs.readdirSync(pathToFile), result);
 
         }
         else {
           if (file.substr(-1 * (extension.length + 1)) == '.' + extension) {
-            let pathBackslash = pathToFile;
-            let pathSlash = pathBackslash.replace(/\\/g, "/");
-            if(fs.readFileSync(pathSlash) == ''){
-              colorNodeLog(' ', 'white');
-              colorNodeLog('====================================', 'white');
-              colorNodeLog('File: ' + pathSlash + ' is empty!', 'red');
-              colorNodeLog(' ', 'white');
-              colorNodeLog('====================================', 'white');
+            let pathSlash = pathToFile.replace(/\\/g, "/");
+            options.data = fs.readFileSync(pathSlash);
+            if (isObjectEmpty(options.data)) {
+              showEmptyFileMessage(pathSlash);
               return;
             }
-
-            options.data = fs.readFileSync(pathSlash);
-            runValidator(pathSlash);
-
+            runValidator(pathSlash, options);
           }
         }
       }
     )
     return;
   }
-
   validateMarkupOfAllFilesByExtension('./', 'html');
 }
+let currentFilePath = argv.url || argv.file;
 
 if (!argv.allfiles) {
-  runValidator(options);
+  runValidator(currentFilePath, options, fileOrUrl);
 }
 
-function colorNodeLog(msg, color = 'white', bgColor) {
-
-  switch (color) {
-    case 'black':
-    color = '\x1b[30m';
-      break;
-    case 'red':
-    color = '\x1b[31m';
-      break;
-    case 'green':
-    color = '\x1b[32m';
-      break;
-    case 'yellow':
-    color = '\x1b[33m';
-      break;
-    case 'blue':
-    color = '\x1b[34m';
-      break;
-    case 'magenta':
-    color = '\x1b[35m';
-      break;
-    case 'cyan':
-    color = '\x1b[36m';
-      break;
-    case 'white':
-    color = '\x1b[37m';
-      break;
-    default:
-    color = '\x1b[37m';
-      break;
+function isObjectEmpty(object) {
+  if ((object.length == 0) || !Object.keys(object).length) {
+    return true;
   }
-  let colorCodes = color;
-  if (typeof bgColor !== 'undefined') {
-    switch (bgColor) {
-      case 'black':
-        bgColor = '\x1b[40m';
-        break;
-      case 'red':
-        bgColor = '\x1b[41m';
-        break;
-      case 'green':
-        bgColor = '\x1b[42m';
-        break;
-      case 'yellow':
-        bgColor = '\x1b[43m';
-        break;
-      case 'blue':
-        bgColor = '\x1b[44m';
-        break;
-      case 'magenta':
-        bgColor = '\x1b[45m';
-        break;
-      case 'cyan':
-        bgColor = '\x1b[46m';
-        break;
-      case 'white':
-        bgColor = '\x1b[47m';
-        break;
-      default:
-        bgColor = '\x1b[40m';
-        break;
-    }
-    colorCodes = color + '%s' + bgColor;
-  }
+  return false;
+}
 
+function showEmptyFileMessage(pathOfFile) {
+  colorNodeLog(' ', 'white');
+  colorNodeLog('---------', 'white');
+  colorNodeLog('file: ' + pathOfFile + ' is empty!', 'red');
+  colorNodeLog(' ', 'white');
+  colorNodeLog('---------', 'white');
+  return
+}
+
+function colorNodeLog(msg, color, bgColor) {
+  color = color || 'white';
+  bgColor = bgColor || 'black';
+  let colorCodes = colors[color] + '%s' + bgColors[bgColor];
   console.log(colorCodes, msg);
 }
 
-function runValidator(CurrentFilePath) {
+function runValidator(CurrentFilePath, options, fileOrUrl = 'file') {
+
+  if(typeof CurrentFilePath === Object) {
+    CurrentFilePath = argv.file;
+  }
 
   validator(options, (error, data) => {
     if (error) {
@@ -211,25 +192,27 @@ function runValidator(CurrentFilePath) {
       }
       if (validationFailed) {
         if (!argv.verbose && !argv.quiet) {
-          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog(fileOrUrl +': ' + CurrentFilePath, 'yellow');
           colorNodeLog(documentNotFound ? 'Page not found' : 'Page is not valid', 'red');
+          colorNodeLog('---------', 'white');
         }
         if (argv.verbose || argv.quiet) {
-          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog(fileOrUrl +': ' + CurrentFilePath, 'yellow');
           colorNodeLog(documentNotFound ? 'Page not found' : 'Page is not valid', 'red');
           colorNodeLog(msg, 'magenta');
-          colorNodeLog('====================================', 'white');
+          colorNodeLog('---------', 'white');;
         }
         process.exitCode = noExitError && 1 // CHANGE
       } else {
         if (!argv.verbose && !argv.quiet) {
-          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
-          colorNodeLog('Page is valid','green');
+          colorNodeLog(fileOrUrl +': ' + CurrentFilePath, 'yellow');
+          colorNodeLog('Page is valid', 'green');
+          colorNodeLog('---------', 'white');
         }
         if (argv.verbose) {
-          colorNodeLog('File: ' + CurrentFilePath, 'yellow');
+          colorNodeLog(fileOrUrl +': ' + CurrentFilePath, 'yellow');
           colorNodeLog(msg, 'green');
-          colorNodeLog('====================================', 'white');
+          colorNodeLog('---------', 'white');
         }
       }
     }
